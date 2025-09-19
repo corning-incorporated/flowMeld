@@ -1,0 +1,16 @@
+build/
+*/build/
+
+*.mpflow
+*.exe
+*.out
+*.o
+
+movies/
+output/
+tmp/
+logs/
+
+.DS_Store
+Thumbs.db
+

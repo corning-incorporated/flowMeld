@@ -1,0 +1,103 @@
+<!--******************************************************************************** -->
+<!---  Copyright 2025. Corning Incorporated. All rights reserved.                                                                                                           #
+  This software may only be used in accordance with the identified license(s).     
+                                                                                                                                                                        
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR       
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,        
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL         
+  CORNING BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN      
+  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN               
+  CONNECTION WITH THE SOFTWARE OR THE USE OF THE SOFTWARE.                        
+************************************************************************************
+  Authors:                                                                        
+ Hamed Haddadi Staff Scientist                                                    
+               haddadigh@corning.com                                              
+ David Heine   Principal Scientist and Manager                                    
+               heinedr@corning.com                                                
+*********************************************************************************** -->
+<?xml version="1.0" ?>
+<!-- input parameters for Multiphase Multicomponent simulations -->
+<!-- filenames -->
+<filenames>
+    <!-- path to microstructure dat file -->
+    <microstructure>  </microstructure>
+    <!-- path to output directory: directory must exist-->
+    <output_directory>  </output_directory>
+</filenames>
+
+<!-- define resolutions and periodicity flag; if False then symmetry is applied-->
+<domain>
+    <resolution> <x>  </x> <y>  </y> <z>  </z> </resolution>
+    <periodic_bc> <x> False </x> <y> False </y> <z> False </z> </periodic_bc>
+</domain>
+
+<flow>
+    <!-- choose between imbibition, drainage, runout and drying and drying-rate -->
+    <!-- drying-rate apoplies a rate dependent drying protocol -->
+    <type> drying </type>
+    <!-- number of pressure steps for imbibition > 0; for drying group: 1-->
+    <number_of_pressure_steps> </number_of_pressure_steps>
+    <!-- if known use a number; if not smaller number applies higher pressure  -->
+    <min_throat_radius> </min_throat_radius>
+</flow>
+
+<!-- property of fluids -->
+<fluids>
+    <!-- for imbibition. drainage and runout, gc is non zero; for drying gc = 0-->
+    <gc>  </gc>
+    <!-- change_type: 'range' or 'step': works if flow type is drying-rate -->
+    <!-- applies to both viscosity and g -->
+    <change_type>  </change_type>
+    <!-- only for drying, assign values here -->
+    <g00> 1.0 </g00>
+    <g11> 0.0 </g11>
+    <!-- for constant rate drying number changes from 0.4-1 as a good range (Shan Chen Model) -->
+    <g01> 0.8 </g01>
+    <!-- the following g values are used to setup drying with rate change -->
+    <!-- if zero is passed then rate change does not apply -->
+    <!-- it is possible to change viscosity and not g by gmin = gmax-->
+    <gmin> 0.0 </gmin>
+    <gmax> 0.0 </gmax>
+    <!-- currently supports uniform wettability -->
+    <!-- negative values: for non wetting and positive values for wetting: 0.4 from
+        Huang 2007 a good starting point-->
+    <!-- f1 fluid is the main or the invading fluid-->
+    <f1_fluid_surface_adhesion> 0.2 </f1_fluid_surface_adhesion>
+    <omega_f1> 1 </omega_f1>
+    <omega_f2> 1 </omega_f2>
+    <!-- omega_min and omega_max for change of viscosity-->
+    <!-- applies to variable rate drying -->
+    <!-- first activate viscosity change; viscosity change and change of gc can be done independently-->
+    <omega_change> False </omega_change>
+    <!-- Now set omega values for phases -->
+    <omega_min_f1> 0.8 </omega_min_f1>
+    <omega_max_f1> 1.0 </omega_max_f1>
+    <omega_min_f2> 0.8 </omega_min_f2>
+    <omega_max_f2> 0.8 </omega_max_f2>
+    <num_steps> 0 </num_steps>
+    <!-- change_step is adjusted based on max_pressure_iterations: it is an integer -->
+    <change_step> 0 </change_step>
+    <!-- density changes -->
+    <density_f1> 2.0 </density_f1>
+    <density_f2> 2.0 </density_f2>
+    <!-- rhoNoFluid: recommendded value: 0.06-->
+    <density_no_fluid> 0.06 </density_no_fluid>
+    <!-- external forcing -->
+    <force_f1> 0.0 </force_f1>
+    <force_f2> 0.0 </force_f2>
+    <force_direction> </force_direction>
+</fluids>
+
+<simulations>
+    <!-- max_iterations is used to run the system until equilibrium concat line -->
+    <max_iterations>  </max_iterations>
+    <max_pressure_iterations>  </max_pressure_iterations>
+    <!-- output frequency is not used if converge_check_frequency > 0 -->
+    <!-- if output_frequency is set to 0 end of each pressure run is used to output the results -->
+    <output_frequency>  </output_frequency>
+    <!-- if 0 is passed convergence is not checked -->
+    <converge_check_frequency>  </converge_check_frequency>
+    <converge_criterion>  </converge_criterion>
+</simulations>
+
+
