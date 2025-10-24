@@ -1,5 +1,13 @@
 # 🌀 Multiphase Multicomponent Lattice Boltzmann Simulation flowMeld
 
+[![Build Status](https://github.com/haddadigh/flowmeld/actions/workflows/ci.yml/badge.svg)](https://github.com/haddadigh/flowmeld/actions)
+[![Issues](https://img.shields.io/github/issues/haddadigh/flowmeld.svg)](https://github.com/haddadigh/flowmeld/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/haddadigh/flowmeld.svg)](https://github.com/haddadigh/flowmeld/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/haddadigh/flowmeld.svg)](https://github.com/haddadigh/flowmeld/commits/main)
+[![Stars](https://img.shields.io/github/stars/haddadigh/flowmeld.svg?style=social)](https://github.com/haddadigh/flowmeld/stargazers)
+
+
+
 Welcome to the Parallel Lattice Boltzmann codebase for simulating **multiphase** and **multicomponent** flows!  
 Supports physics such as **imbibition**, **drainage**, and **evaporation** in complex 3D domains.
 
