@@ -2,7 +2,6 @@
 
 [![Language](https://img.shields.io/badge/C%2B%2B-11%2B-blue.svg)](https://en.cppreference.com/w/cpp)
 [![Library: Palabos](https://img.shields.io/badge/library-palabos-brightgreen.svg)](https://www.palabos.org/)
-[![Stars](https://img.shields.io/github/stars/haddadigh/flowmeld.svg?style=social)](https://github.com/haddadigh/flowmeld/stargazers)
 
 
 
