@@ -1,6 +1,8 @@
 # 🌀 Multiphase Multicomponent Lattice Boltzmann Simulation flowMeld
 
 [![Language](https://img.shields.io/badge/C%2B%2B-11%2B-blue.svg)](https://en.cppreference.com/w/cpp)
+[![CMake](https://img.shields.io/badge/build%20tool-CMake%203.10%2B-blue.svg)](https://cmake.org/)
+[![MPI](https://img.shields.io/badge/MPI-OpenMPI%2FMPICH%2FIntelMPI-green.svg)](https://www.mpi-forum.org/)
 [![Library: Palabos](https://img.shields.io/badge/library-palabos-brightgreen.svg)](https://www.palabos.org/)
 
 
