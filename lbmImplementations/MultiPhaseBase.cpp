@@ -20,17 +20,29 @@
 
 // helpers
 void MultiPhaseBase::setDomainSize(const plint & nx, const plint & ny, const plint & nz) {
+    if (nx <= 0 || ny <= 0 || nz <= 0) {
+        throw std::invalid_argument("All domain dimensions must be positive");
+    }
     nx_ = nx;
     ny_ = ny;
     nz_ = nz;
 }
 
 void MultiPhaseBase::setFileNames(const FileParams & fileParams) {
+    if (fileParams.fNameIn.empty() || fileParams.fNameOut.empty()) {
+        throw std::invalid_argument("file names must not be empty");
+    }
     geoFileName_ = fileParams.fNameIn;
     outputDir_ = fileParams.fNameOut;
     
 }
 void MultiPhaseBase::setDensities(const DensityParams<T> & densityParams) {
+    if (densityParams.rhoF1 < 0 || densityParams.rhoF2 < 0 ||
+        densityParams.rhoInitInlet < 0 || densityParams.rhoInitOutlet < 0 ||
+        densityParams.rhoNoFluid < 0) {
+        throw std::invalid_argument("Density values must be non-negative.");
+    }
+
     rhoF1_ = densityParams.rhoF1;
     rhoF2_ = densityParams.rhoF2;
     rhoInitInlet_ = densityParams.rhoInitInlet;
@@ -57,6 +69,11 @@ void MultiPhaseBase::setPeriodicBCFlags(const PeriodicParams & periodicParams) {
 }
 
 void MultiPhaseBase::setFluidsProperties(const FluidsParams<T> & fluidsParams) {
+
+    if (fluidsParams.omegaF1 <= 0 || fluidsParams.omegaF1 > 1 ||
+        fluidsParams.omegaF2 <= 0 || fluidsParams.omegaF2 > 1) {
+        throw std::invalid_argument("Omega values must be in the range (0, 1].");
+    }
     T omegaF1{0}, omegaF2{0};
     omegaF1 = fluidsParams.omegaF1;
     omegaF2 = fluidsParams.omegaF2;
