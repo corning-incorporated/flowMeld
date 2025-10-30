@@ -28,14 +28,41 @@ class MultiPhasePressure: public MultiPhaseBase {
     
     public:
         MultiPhasePressure(MultiBlockLattice3D<T, MPDESCRIPTOR> && latticeFluidOne,
-                     MultiBlockLattice3D<T, MPDESCRIPTOR> && latticeFluidTwo,
-                      MultiScalarField3D<int> && geometry, plint numruns, T minradius):
-                        MultiPhaseBase(std::move(latticeFluidOne), std::move(latticeFluidTwo), std::move(geometry)),
-                                totalNumRuns_{numruns},
-                                    minRadius_{minradius} {};
+            MultiBlockLattice3D<T, MPDESCRIPTOR> && latticeFluidTwo,
+            MultiScalarField3D<int> && geometry, plint numruns, T minradius):
+            MultiPhaseBase(std::move(latticeFluidOne), std::move(latticeFluidTwo), std::move(geometry)),
+            totalNumRuns_{numruns},
+            minRadius_{minradius} {};
         
         MultiPhasePressure(const MultiPhasePressure &) = delete;
         MultiPhasePressure& operator=(const MultiPhasePressure &) = delete;
+
+        MultiPhasePressure(MultiPhasePressure&& other) noexcept
+            : MultiPhaseBase(std::move(other)), 
+            totalNumRuns_(other.totalNumRuns_),
+            minRadius_(other.minRadius_),
+            inletRhoValues_(std::move(other.inletRhoValues_)),
+            outletRhoValues_(std::move(other.outletRhoValues_)),
+            pressureValues_(std::move(other.pressureValues_)),
+            boundaryCondition_(other.boundaryCondition_)
+            {
+            other.boundaryCondition_ = nullptr;
+            }
+
+        MultiPhasePressure& operator=(MultiPhasePressure&& other) noexcept {
+        if (this != &other) {
+            MultiPhaseBase::operator=(std::move(other));
+            totalNumRuns_ = other.totalNumRuns_;
+            minRadius_ = other.minRadius_;
+            inletRhoValues_ = std::move(other.inletRhoValues_);
+            outletRhoValues_ = std::move(other.outletRhoValues_);
+            pressureValues_ = std::move(other.pressureValues_);
+            delete boundaryCondition_; // cleanup old pointer!
+            boundaryCondition_ = other.boundaryCondition_;
+            other.boundaryCondition_ = nullptr;
+            }
+            return *this;
+            }
 
         
         // virtual methods
