@@ -33,6 +33,7 @@ class MultiPhaseBase {
         // class is not copyable
         MultiPhaseBase(const MultiPhaseBase&) = delete;
         MultiPhaseBase& operator=(const MultiPhaseBase&) = delete;
+        MultiPhaseBase& operator=(MultiPhaseBase&&) = delete;
 
         // constructor and attribute flag helpers (called by client code)
         void setDomainSize(const plint &, const plint &, const plint &);
