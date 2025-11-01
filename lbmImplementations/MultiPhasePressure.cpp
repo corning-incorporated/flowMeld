@@ -20,8 +20,10 @@
 
 
 void MultiPhasePressure::setInletOutletDensities() {
-    T cosTheta = std::abs(4.*gF1S_/(gc_*(rhoInitInlet_ - rhoNoFluid_)));
-    T deltaRho = 6.0*sigma*cosTheta/minRadius_;
+    constexpr T four = 4.0;
+    constexpr T six = 6.0;
+    T cosTheta = std::abs(four*gF1S_/(gc_*(rhoInitInlet_ - rhoNoFluid_)));
+    T deltaRho = six*sigma*cosTheta/minRadius_;
     T stepSize = deltaRho/totalNumRuns_; 
 
     for (plint runNum = 0; runNum <= totalNumRuns_; ++runNum) {
@@ -69,7 +71,7 @@ void MultiPhasePressure::operator()(plint maxIter, plint checkFreq, plint output
     // outputs are generated at the end of each converged step
     setUp();
     bool hasNotConverged{true};
-    plint iT{0}, numOut{0}, totalNumIter{0}, numIter{0};
+    plint iT{0}, numOut{0}, totalNumIter{0};
     T newAvgEnF1{}, newAvgEnF2{}, oldAvgEnF1{1.}, oldAvgEnF2{1.};
     T cyclePressure{0.};
     T volume = (T)(nx_*ny_*ny_);
